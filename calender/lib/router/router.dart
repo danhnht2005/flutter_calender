@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:calender/screens/home_screen/home_screen.dart';
 import 'package:calender/screens/login_screen/login_screen.dart';
 import 'package:calender/screens/register_screen/register_screen.dart';
+import 'package:calender/screens/add_event_screen/add_event_screen.dart';
+import 'package:calender/screens/event_detail_screen/event_detail_screen.dart';
 import 'package:calender/helpers/token.dart';
 
 final GoRouter router = GoRouter(
@@ -36,6 +38,23 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/register',
       builder: (context, state) => const RegisterScreen(),
+    ),
+    GoRoute(
+      path: '/add-event',
+      builder: (context, state) {
+        final DateTime? selectedDate = state.extra as DateTime?;
+        return AddEventScreen(selectedDate: selectedDate);
+      },
+    ),
+    GoRoute(
+      path: '/event-detail',
+      builder: (context, state) {
+        final Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
+        return EventDetailScreen(
+          taskData: extra['task'] as Map<String, dynamic>,
+          categoryData: extra['category'] as Map<String, dynamic>?,
+        );
+      },
     ),
   ],
 );

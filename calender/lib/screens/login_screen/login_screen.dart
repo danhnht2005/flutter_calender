@@ -165,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 20),
               const Text(
-                '© 2026 calender, danhnht2005',
+                '© 2026 calender',
                 style: TextStyle(fontSize: 12, color: Colors.grey),
               ),
               const SizedBox(height: 20),
