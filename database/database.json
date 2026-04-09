@@ -1,80 +1,83 @@
 {
   "users": [
     {
-      "id": "1",
+      "id": 1,
       "fullName": "Nguyen Thi A",
       "email": "nguyenthia@gmail.com",
       "password": "nguyenthia",
       "token": "vX4jM9RtLp2QwK7nYc5B"
     },
     {
-      "id": "2",
+      "id": 2,
       "fullName": "Do Thi B",
       "email": "dothib@gmail.com",
       "password": "dothib",
       "token": "zF8sW3bV1xN6gD0eM5pJ"
     },
     {
-      "id": "3",
+      "id": 3,
       "fullName": "Ngo Van C",
       "email": "ngovanc@gmail.com",
       "password": "ngovanc",
       "token": "pY2vH5kQ8cT9mR3LqF7b"
     },
     {
-      "id": "4",
+      "id": 4,
       "fullName": "Le Van D",
       "email": "levand@gmail.com",
       "password": "levand",
       "token": "dM6gJ5pNeD8sZ1xV4bW0"
     },
     {
-      "id": "5",
+      "id": 5,
       "fullName": "Nguyen Thi E",
       "email": "nguyenthie@gmail.com",
       "password": "nguyenthie",
       "token": "hR5tP2vLqY9kQ3cN8aX7"
     },
     {
+      "id": 6,
       "fullName": "Nguyễn Huỳnh Thành Danh",
       "email": "thanhdanh130425@gmail.com",
       "password": "thanhdanh",
-      "token": "tWGqloqk7Z9LaIlFDO9m",
-      "id": "6"
-    },
-    {
-      "fullName": "danh",
-      "email": "danh@gmail.com",
-      "password": "danhnht",
-      "token": "ceOfAusSGUoFVzAsj4mc",
-      "id": "K4Ko2K-BAqM"
+      "token": "tWGqloqk7Z9LaIlFDO9m"
     }
   ],
   "categories": [
     {
-      "id": "1",
+      "id": 1,
+      "userId": 1,
       "name": "Schoolwork",
-      "color": "yellow"
+      "color": "F2B828",
+      "isActive": true
     },
     {
-      "id": "2",
+      "id": 2,
+      "userId": 1,
       "name": "Course",
-      "color": "orange"
+      "color": "FE7032",
+      "isActive": true
     },
     {
-      "id": "3",
+      "id": 3,
+      "userId": 1,
       "name": "Important",
-      "color": "red"
+      "color": "EE000D",
+      "isActive": true
     },
     {
-      "id": "4",
+      "id": 4,
+      "userId": 1,
       "name": "Deep work",
-      "color": "green"
+      "color": "48CA80",
+      "isActive": true
     },
     {
-      "id": "5",
+      "id": 5,
+      "userId": 1,
       "name": "Socialize",
-      "color": "purple"
+      "color": "9950FF",
+      "isActive": true
     }
   ],
   "tasks": [
