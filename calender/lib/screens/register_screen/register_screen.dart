@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:calender/services/userServices.dart';
+import 'package:calender/services/user_services.dart';
 import 'package:go_router/go_router.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -11,7 +11,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
-final _fullNameController = TextEditingController();
+  final _fullNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -144,6 +144,19 @@ final _fullNameController = TextEditingController();
                         child: const Text('Đăng ký'),
                       ),
                     ),
+
+                    const SizedBox(height: 10),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Bạn đã có tài khoản?'),
+                        TextButton(
+                          onPressed: () => context.go('/login'),
+                          child: const Text('Đăng nhập'),
+                        ),
+                      ],
+                    ),
                   ],
                 ),  
               ),
@@ -151,7 +164,7 @@ final _fullNameController = TextEditingController();
               const Spacer(),
 
               const Text(
-                '© 2026 calender, danhnht2005',
+                '© 2026 calender',
                 style: TextStyle(fontSize: 12, color: Colors.grey),
               ),
               const SizedBox(height: 20),

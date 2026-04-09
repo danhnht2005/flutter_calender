@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   AppTheme._();
 
-  static const Color _seedColor = Color(0xFF0D3B66);
+  static const Color _seedColor = Color(0xFFF8F8F8);
 
   static ThemeData get lightTheme {
     final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -14,12 +14,23 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-      scaffoldBackgroundColor: const Color(0xFFF6F8FB),
-      appBarTheme: const AppBarTheme(centerTitle: true),
+      scaffoldBackgroundColor: const Color(0xFFFFFFFF),
+      appBarTheme: const AppBarTheme(
+        centerTitle: true,
+        backgroundColor: Color(0xFFF8F8F8),
+        surfaceTintColor: Colors.transparent,
+        elevation: 0, 
+      ),
+      drawerTheme: const DrawerThemeData(
+        backgroundColor: Color(0xFFF8F8F8),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.zero
+        ),
+      ),
       cardTheme: CardThemeData(
         color: Colors.white,
         elevation: 0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
       ),
     );
   }
