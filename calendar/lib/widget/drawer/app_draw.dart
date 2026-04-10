@@ -1,3 +1,4 @@
+import 'package:calender/screens/add_category/add_catetory.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:calender/helpers/token.dart';
@@ -55,6 +56,25 @@ class _AppDrawerState extends State<AppDrawer> {
     await Token.removeId();
     if (!context.mounted) return;
     context.go('/login');
+  }
+
+  void _showAddCategorySheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+      ),
+      builder: (BuildContext context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: const AddCategoryScreen(),
+        );
+      },
+    );
   }
 
   @override
@@ -138,12 +158,17 @@ class _AppDrawerState extends State<AppDrawer> {
                     ),
                     const SizedBox(width: 12),
                     Expanded(
-                      child: Text(
-                        (item.name ?? 'Danh mục').toString(),
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                      child: GestureDetector(
+                        onTap: () {
+                          context.go('/details-category/${item.id}');
+                        },
+                        child: Text(
+                          (item.name ?? 'Danh mục').toString(),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
@@ -157,15 +182,23 @@ class _AppDrawerState extends State<AppDrawer> {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.add, color: Colors.grey),
+              horizontalTitleGap: 8,
+              leading: const Icon(Icons.add, color: Colors.grey, size: 20),
               title: const Text(
                 'Thêm danh mục lịch',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 14
-                ),
-                ),
-              onTap: () => context.go('/add-category'),
+                style: TextStyle(color: Colors.grey, fontSize: 14),
+              ),
+              onTap: () => {
+                Navigator.pop(context),
+                _showAddCategorySheet(context),
+              },
+            ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(16, 12, 16, 8),
+              child: Text(
+                'Được chia sẻ với tôi',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+              ),
             ),
             const Divider(),
             ListTile(

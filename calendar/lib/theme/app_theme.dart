@@ -16,7 +16,6 @@ class AppTheme {
       colorScheme: colorScheme,
       scaffoldBackgroundColor: const Color(0xFFFFFFFF),
       appBarTheme: const AppBarTheme(
-        centerTitle: true,
         backgroundColor: Color(0xFFF8F8F8),
         surfaceTintColor: Colors.transparent,
         elevation: 0, 

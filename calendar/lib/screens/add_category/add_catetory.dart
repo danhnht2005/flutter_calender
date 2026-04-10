@@ -3,9 +3,7 @@ import 'package:calender/helpers/token.dart';
 import 'package:calender/models/color_category.dart';
 import 'package:calender/services/categori_service.dart';
 import 'package:calender/services/color_service.dart';
-import 'package:calender/widget/back_home/back_home.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class AddCategoryScreen extends StatefulWidget {
   const AddCategoryScreen({super.key});
@@ -40,7 +38,6 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
       setState(() {
         colorOptions = response.map((e) => ColorCategory.fromJson(e)).toList();
       });
-      print('Fetched colors: $colorOptions');
     }
   }
 
@@ -52,11 +49,15 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
     final String? id = await Token.getId();
     if (id == null) return;
 
-    dynamic response = await createCategory(int.parse(id), name, color);
+    dynamic response = await createCategory(
+      int.parse(id),
+      name,
+      description,
+      color,
+    );
 
     if (response != null) {
       if (!context.mounted) return;
-      context.go('/');
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text('Thêm danh mục thành công')));
@@ -70,138 +71,150 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Thêm danh mục lịch'),
-        elevation: 4.0,
-        shadowColor: Colors.black.withOpacity(0.5),
-        surfaceTintColor: Colors.transparent,
-        leading: const BackHome(),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.add),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              width: 40,
+              height: 4,
+              margin: const EdgeInsets.only(bottom: 16), // Tạo khoảng cách với hàng bên dưới
+              decoration: BoxDecoration(
+                color: Colors.grey.shade300, // Màu xám nhạt giống ảnh
+                borderRadius: BorderRadius.circular(2), // Bo góc tròn
+              ),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Thêm danh mục',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+
+              TextButton(
               onPressed: () {
                 handleAddCategory();
+                Navigator.pop(context);
               },
-            ),
-            const Text(
-              'Tên danh mục',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-
-            const SizedBox(height: 8),
-
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                hintText: 'Tiêu đề',
-                hintStyle: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold,
-                ),
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(
+              style: TextButton.styleFrom(
+                backgroundColor: const Color(0xFFE5E5E5),
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                padding: const EdgeInsets.symmetric(
                   horizontal: 16,
-                  vertical: 8,
+                  vertical: 4,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
                 ),
               ),
-            ),
-
-            const Divider(height: 1, color: Colors.black12),
-            const SizedBox(height: 16),
-
-            const Text(
-              'Mô tả danh mục',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-
-            const SizedBox(height: 8),
-
-            TextField(
-              controller: _descriptionController,
-              decoration: InputDecoration(
-                hintText: 'Mô tả',
-                hintStyle: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.grey,
+              child: const Text(
+                'Hoàn tất',
+                style: TextStyle(
+                  fontSize: 14,
                   fontWeight: FontWeight.bold,
-                ),
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
+                  color: Colors.black,
                 ),
               ),
             ),
+            ],
+          ),
 
-            const Divider(height: 1, color: Colors.black12),
-            const SizedBox(height: 16),
+          const SizedBox(height: 14),
 
-            const Text(
-              'Màu danh mục',
-              style: TextStyle(
-                fontSize: 14,
+          TextField(
+            controller: _nameController,
+            decoration: InputDecoration(
+              hintText: 'Tiêu đề',
+              hintStyle: const TextStyle(
+                fontSize: 20,
+                color: Colors.grey,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
               ),
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
             ),
+          ),
 
-            const SizedBox(height: 12),
+          const SizedBox(height: 16),
+          const Divider(height: 1, color: Colors.black12),
+          const SizedBox(height: 16),
 
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Wrap(
-                spacing: 16.0,
-                runSpacing: 12.0,
-                children: colorOptions.map((item) {
-                  bool isSelected = _selectedColor == item.color;
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedColor = item.color ?? 'B8B8B8';
-                      });
-                    },
-                    child: Container(
-                      width: 24,
-                      height: 24,
-                      decoration: BoxDecoration(
-                        color: getColor(item.color),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: isSelected
-                          ? Center(
-                              child: Icon(
-                                Icons.check,
-                                size: 16,
-                                color: Colors.black,
-                              ),
-                            )
-                          : null,
+          TextField(
+            controller: _descriptionController,
+            decoration: InputDecoration(
+              hintText: 'Mô tả',
+              hintStyle: const TextStyle(
+                fontSize: 14,
+                color: Colors.grey,
+              ),
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+            ),
+          ),
+
+          const SizedBox(height: 16),
+          const Divider(height: 1, color: Colors.black12),
+          const SizedBox(height: 16),
+
+          const Text(
+            'Màu danh mục',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey,
+            ),
+          ),
+
+          const SizedBox(height: 12),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Wrap(
+              spacing: 16.0,
+              runSpacing: 12.0,
+              children: colorOptions.map((item) {
+                bool isSelected = _selectedColor == item.color;
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedColor = item.color ?? 'B8B8B8';
+                    });
+                  },
+                  child: Container(
+                    width: 24,
+                    height: 24,
+                    decoration: BoxDecoration(
+                      color: getColor(item.color),
+                      borderRadius: BorderRadius.circular(6),
                     ),
-                  );
-                }).toList(),
-              ),
+                    child: isSelected
+                        ? Center(
+                            child: Icon(
+                              Icons.check,
+                              size: 16,
+                              color: Colors.black,
+                            ),
+                          )
+                        : null,
+                  ),
+                );
+              }).toList(),
             ),
+          ),
 
-            const SizedBox(height: 24),
-          ],
-        ),
+          const SizedBox(height: 24),
+        ],
       ),
     );
   }
