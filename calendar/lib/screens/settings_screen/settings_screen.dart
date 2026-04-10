@@ -1,5 +1,5 @@
+import 'package:calender/widget/back_home/back_home.dart';
 import 'package:flutter/material.dart';
-import 'package:calender/widget/drawer/app_draw.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -15,8 +15,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Settings Screen')),
-      drawer: const AppDrawer(),
+      appBar: AppBar(
+        title: const Text('Cài đặt'),
+        leading: const BackHome(),
+      ),
       body: const Center(
         child: Text(
           'Settings Screen',

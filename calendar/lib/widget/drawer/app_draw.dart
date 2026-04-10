@@ -156,6 +156,17 @@ class _AppDrawerState extends State<AppDrawer> {
                 ),
               ),
             ),
+            ListTile(
+              leading: const Icon(Icons.add, color: Colors.grey),
+              title: const Text(
+                'Thêm danh mục lịch',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 14
+                ),
+                ),
+              onTap: () => context.go('/add-category'),
+            ),
             const Divider(),
             ListTile(
               leading: const Icon(Icons.logout, color: Colors.redAccent),

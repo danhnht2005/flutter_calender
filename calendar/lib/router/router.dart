@@ -5,6 +5,7 @@ import 'package:calender/screens/login_screen/login_screen.dart';
 import 'package:calender/screens/register_screen/register_screen.dart';
 import 'package:calender/helpers/token.dart';
 import 'package:calender/screens/settings_screen/settings_screen.dart';
+import 'package:calender/screens/add_category/add_catetory.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/',
@@ -40,6 +41,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/settings',
       builder: (context, state) => const SettingsScreen(),
+    ),
+    GoRoute(
+      path: '/add-category',
+      builder: (context, state) => const AddCategoryScreen(),
     ),
   ],
 );

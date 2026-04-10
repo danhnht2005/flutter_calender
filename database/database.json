@@ -1,42 +1,42 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "fullName": "Nguyen Thi A",
       "email": "nguyenthia@gmail.com",
       "password": "nguyenthia",
       "token": "vX4jM9RtLp2QwK7nYc5B"
     },
     {
-      "id": 2,
+      "id": "2",
       "fullName": "Do Thi B",
       "email": "dothib@gmail.com",
       "password": "dothib",
       "token": "zF8sW3bV1xN6gD0eM5pJ"
     },
     {
-      "id": 3,
+      "id": "3",
       "fullName": "Ngo Van C",
       "email": "ngovanc@gmail.com",
       "password": "ngovanc",
       "token": "pY2vH5kQ8cT9mR3LqF7b"
     },
     {
-      "id": 4,
+      "id": "4",
       "fullName": "Le Van D",
       "email": "levand@gmail.com",
       "password": "levand",
       "token": "dM6gJ5pNeD8sZ1xV4bW0"
     },
     {
-      "id": 5,
+      "id": "5",
       "fullName": "Nguyen Thi E",
       "email": "nguyenthie@gmail.com",
       "password": "nguyenthie",
       "token": "hR5tP2vLqY9kQ3cN8aX7"
     },
     {
-      "id": 6,
+      "id": "6",
       "fullName": "Nguyễn Huỳnh Thành Danh",
       "email": "thanhdanh130425@gmail.com",
       "password": "thanhdanh",
@@ -45,35 +45,35 @@
   ],
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "userId": 1,
       "name": "Schoolwork",
       "color": "F2B828",
       "isActive": true
     },
     {
-      "id": 2,
+      "id": "2",
       "userId": 1,
       "name": "Course",
       "color": "FE7032",
       "isActive": true
     },
     {
-      "id": 3,
+      "id": "3",
       "userId": 1,
       "name": "Important",
       "color": "EE000D",
       "isActive": true
     },
     {
-      "id": 4,
+      "id": "4",
       "userId": 1,
       "name": "Deep work",
       "color": "48CA80",
       "isActive": true
     },
     {
-      "id": 5,
+      "id": "5",
       "userId": 1,
       "name": "Socialize",
       "color": "9950FF",
@@ -83,11 +83,48 @@
   "tasks": [
     {
       "id": "1",
-      "categoryId": "1",
+      "categoryId": 1,
       "subject": "Họp dự án Flutter",
       "from": "2026-04-06T09:00:00",
       "to": "2026-04-06T10:30:00",
       "isAllDay": false
+    }
+  ],
+  "colors": [
+    {
+      "id": "1",
+      "name": "vàng",
+      "color": "F2B828"
+    },
+    {
+      "id": "2",
+      "name": "cam",
+      "color": "FE7032"
+    },
+    {
+      "id": "3",
+      "name": "đỏ",
+      "color": "EE000D"
+    },
+    {
+      "id": "4",
+      "name": "xanh lá",
+      "color": "48CA80"
+    },
+    {
+      "id": "5",
+      "name": "tím",
+      "color": "9950FF"
+    },
+    {
+      "id": "6",
+      "name": "xanh dương",
+      "color": "32A5E4"
+    },
+    {
+      "id": "8",
+      "name": "xám",
+      "color": "B8B8B8"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
