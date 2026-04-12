@@ -1,4 +1,5 @@
 import 'package:calender/helpers/get_color.dart';
+import 'package:calender/models/categories.dart';
 import 'package:calender/models/color_category.dart';
 import 'package:calender/services/categori_service.dart';
 import 'package:calender/services/color_service.dart';
@@ -18,6 +19,7 @@ class DetailCategoryScreen extends StatefulWidget {
 class _DetailCategoryScreenState extends State<DetailCategoryScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  Categories categories = Categories();
   String _selectedColor = "B8B8B8";
 
   List<ColorCategory> colorOptions = [];
@@ -26,6 +28,7 @@ class _DetailCategoryScreenState extends State<DetailCategoryScreen> {
   void initState() {
     super.initState();
     _fetchColors();
+    _fetchCategory();
   }
 
   @override
@@ -33,6 +36,18 @@ class _DetailCategoryScreenState extends State<DetailCategoryScreen> {
     _nameController.dispose();
     _descriptionController.dispose();
     super.dispose();
+  }
+
+  Future<void> _fetchCategory() async {
+    final dynamic response = await getCategory(widget.id);
+    if (response != null) {
+      setState(() {
+        categories = Categories.fromJson(response);
+        _nameController.text = categories.name ?? '';
+        _descriptionController.text = categories.description ?? '';
+        _selectedColor = categories.color ?? "B8B8B8";
+      });
+    }
   }
 
   Future<void> _fetchColors() async {
@@ -60,6 +75,32 @@ class _DetailCategoryScreenState extends State<DetailCategoryScreen> {
       ElegantNotification.error(
         title: Text("Xóa danh mục thất bại"),
         description: Text("Đã xảy ra lỗi khi xóa danh mục"),
+      ).show(context);
+    }
+  }
+
+  Future<void> handleEditCategory() async {
+    dynamic response = await editCategory(
+      widget.id,
+      int.parse(categories.userId ?? '0'),
+      _nameController.text,
+      _descriptionController.text,
+      _selectedColor,
+    );
+
+    if (!mounted) return;
+
+    if (response != null) {
+      if (!context.mounted) return;
+      ElegantNotification.success(
+        title: Text("Sửa danh mục thành công"),
+        description: Text("Danh mục của bạn đã được sửa thành công"),
+      ).show(context);
+    } else {
+      if (!context.mounted) return;
+      ElegantNotification.error(
+        title: Text("Sửa danh mục thất bại"),
+        description: Text("Đã xảy ra lỗi khi sửa danh mục"),
       ).show(context);
     }
   }
@@ -108,6 +149,7 @@ class _DetailCategoryScreenState extends State<DetailCategoryScreen> {
 
               TextButton(
                 onPressed: () {
+                  handleEditCategory();
                   Navigator.pop(context);
                 },
                 style: TextButton.styleFrom(
