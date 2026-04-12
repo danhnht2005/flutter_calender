@@ -15,3 +15,8 @@ Future<dynamic> createCategory(int userId, String name,String description, Strin
   });
   return result;
 }
+
+Future<dynamic> deleteCategory(String id) async {
+  final result = await ApiService.del('categories/$id');
+  return result;
+}
