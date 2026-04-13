@@ -1,3 +1,7 @@
+import 'package:calender/helpers/get_color.dart';
+import 'package:calender/models/meeting_data_source.dart';
+import 'package:calender/models/task.dart';
+import 'package:calender/services/task_service.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:calender/widget/drawer/app_draw.dart';
@@ -10,12 +14,47 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Task> listTasks = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchTasks();
+  }
+
+  Future<void> _fetchTasks() async {
+    final dynamic response = await getListTasks();
+    if (response != null && response is List) {
+      setState(() {
+        listTasks = response.map((e) => Task.fromJson(e)).toList();
+      });
+    }
+  }
+
+  List<Meeting> _getDataSource() {
+    final List<Meeting> meetings = <Meeting>[];
+    final DateTime today = DateTime.now();
+    for (var element in listTasks) {
+      meetings.add(
+        Meeting(
+          element.eventName ?? '',
+          DateTime.parse(element.from ?? DateTime.now().toString()),
+          DateTime.parse(element.to ?? today.toString()),
+          getColor(element.background ?? ''),
+          element.isAllDay ?? false,
+        ),
+      );
+    }
+    return meetings;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Home Screen')),
       drawer: const AppDrawer(),
       body: SfCalendar(
+        dataSource: MeetingDataSource(_getDataSource()),
         view: CalendarView.day,
         headerHeight: 0,
         todayHighlightColor: Color(0xFFF04842),
