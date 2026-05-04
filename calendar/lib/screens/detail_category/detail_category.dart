@@ -129,7 +129,7 @@ class _DetailCategoryScreenState extends State<DetailCategoryScreen> {
                 surfaceTintColor: Colors.transparent,
                 onSelected: (String value) {
                   if (value == 'edit-active') {
-                    print('Thực hiện chức năng Sửa');
+                    // Xử lý khi chọn "Chặn trên lịch"
                   } else if (value == 'delete') {
                     handleDeleteCategory();
                     Navigator.pop(context);
